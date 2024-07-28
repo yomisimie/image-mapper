@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Mapper</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="mb-3 col-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Upload image</h3>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="file" id="imageInput" accept="image/jpeg,image/png" class="form-control">
+                        <button id="loadImageBtn" class="btn btn-primary">Load image</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 col-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Upload project</h3>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="file" id="jsonInput" accept="application/json,text/plain" class="form-control">
+                        <button id="loadJsonBtn" class="btn btn-primary">Load image</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-10 offset-lg-1">
+            <div class="card text-center" id="previewImageBox">
+                <div class="card-body">
+                    <p id="imagePlaceholder" class="text-center lead">Image will show here</p>
+                    <img id="previewImage" alt="Sample Image" class="d-none">
+                    <br>
+                    <button class="btn btn-success my-3" id="saveImg">Save project</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./scripts/index.js"></script>
+</body>
+</html>
