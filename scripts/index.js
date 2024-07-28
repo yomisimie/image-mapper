@@ -122,9 +122,10 @@ btnJson.addEventListener('click', async () => {
     let file = jsonInput.files[0];
     const object = await parseJsonFile(file);
     if(object.img) {
-        previewImage.src = object.img;
+        previewImage.src = base64String =object.img;
         previewImage.classList.remove('d-none');
         imagePlaceholder.classList.add('d-none');
+        texts = object.texts;
         setTimeout(() => {
             for(let i in object.texts) {
                 const text = object.texts[i];
