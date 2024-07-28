@@ -43,8 +43,8 @@ btn.addEventListener('click', () => {
     }
 });
 previewImage.addEventListener('click', evt => {
-    const x = (evt.offsetX / previewImage.width) * 100;
-    const y = (evt.offsetY / previewImage.height) * 100;
+    const x = parseFloat(((evt.offsetX / previewImage.width) * 100).toFixed(2));
+    const y = parseFloat(((evt.offsetY / previewImage.height) * 100).toFixed(2));
     const box = prompt('Enter text to be displayed');
     const id = Date.now();
     if(box && box !== '') {
@@ -122,7 +122,7 @@ btnJson.addEventListener('click', async () => {
     let file = jsonInput.files[0];
     const object = await parseJsonFile(file);
     if(object.img) {
-        previewImage.src = base64String =object.img;
+        previewImage.src = base64String = object.img;
         previewImage.classList.remove('d-none');
         imagePlaceholder.classList.add('d-none');
         texts = object.texts;
