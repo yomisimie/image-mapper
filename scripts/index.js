@@ -46,7 +46,7 @@ btn.addEventListener('click', () => {
 previewImage.addEventListener('click', evt => {
     const x = (evt.offsetX / previewImage.width) * 100;
     const y = (evt.offsetY / previewImage.height) * 100;
-    const box = prompt('Enter a valid image');
+    const box = prompt('Enter text to be displayed');
     const id = Date.now();
     if(box && box !== '') {
         texts.push(
@@ -92,6 +92,7 @@ function createTextBoxAtLocation(x, y, text, id) {
     previewImageBox.appendChild(textEl);
 }
 function clearTextBoxes() {
+    base64String = '';
     texts = [];
     const textBoxes = document.querySelectorAll('.textBox, .textBoxPreview');
     textBoxes.forEach(el => {
