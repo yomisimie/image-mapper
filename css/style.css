@@ -20,7 +20,7 @@ img#image {
     border: 1px solid #333;
     border-radius: 5px;
     padding: 10px;
-    max-width: 200px;
+    max-width: 300px;
     text-align: center;
     transform: translateX(calc(-50% + 15px));
 }

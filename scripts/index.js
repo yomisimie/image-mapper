@@ -47,7 +47,7 @@ previewImage.addEventListener('click', evt => {
     const y = parseFloat(((evt.offsetY / previewImage.height) * 100).toFixed(2));
     const box = prompt('Enter text to be displayed');
     const id = Date.now();
-    if(box && box !== '') {
+    if (box && box !== '') {
         texts.push(
             {
                 x: x,
@@ -61,8 +61,8 @@ previewImage.addEventListener('click', evt => {
 })
 
 function createTextBoxAtLocation(x, y, text, id) {
-    const xPx = (x/100) * previewImage.width;
-    const yPx = (y/100) * previewImage.height;
+    const xPx = (x / 100) * previewImage.width;
+    const yPx = (y / 100) * previewImage.height;
     const boxEl = document.createElement('div');
     const textEl = document.createElement('div');
     boxEl.classList.add('textBox');
@@ -70,16 +70,15 @@ function createTextBoxAtLocation(x, y, text, id) {
     textEl.classList.add('textBoxPreview');
     textEl.classList.add('d-none');
     textEl.setAttribute('id', `text-${id}`);
-    boxEl.style.left = (previewImage.offsetLeft + (xPx - (boxWidth/2))) + 'px';
-    boxEl.style.top = (previewImage.offsetTop + (yPx - (boxWidth/2))) + 'px';
-    textEl.style.left = (previewImage.offsetLeft + (xPx - (boxWidth/2))) + 'px';
-    textEl.style.top = (previewImage.offsetTop + (yPx + (boxWidth/2))) + 'px';
-    boxEl.setAttribute('data-text', text);
-    textEl.innerText = text;
+    boxEl.style.left = (previewImage.offsetLeft + (xPx - (boxWidth / 2))) + 'px';
+    boxEl.style.top = (previewImage.offsetTop + (yPx - (boxWidth / 2))) + 'px';
+    textEl.style.left = (previewImage.offsetLeft + (xPx - (boxWidth / 2))) + 'px';
+    textEl.style.top = (previewImage.offsetTop + (yPx + (boxWidth / 2))) + 'px';
+    textEl.innerHTML = text;
     boxEl.setAttribute('title', text);
     boxEl.addEventListener('click', evt => {
         const id = evt.target.id.replace('box-', 'text-');
-        if(evt.target.classList.contains('open')) {
+        if (evt.target.classList.contains('open')) {
             evt.target.classList.remove('open');
             document.getElementById(id).classList.add('d-none');
         } else {
@@ -87,9 +86,24 @@ function createTextBoxAtLocation(x, y, text, id) {
             document.getElementById(id).classList.remove('d-none');
         }
     })
+    boxEl.addEventListener('dblclick', evt => {
+        const id = parseInt(evt.target.getAttribute('id').replace('box-', ''));
+        const box = prompt('Edit text', document.getElementById('text-' + id).innerHTML);
+        if (box && box !== '') {
+            evt.target.setAttribute('title', box);
+            document.getElementById('text-' + id).innerHTML = box;
+            for (let i in texts) {
+                if (texts[i].id === id) {
+                    texts[i].text = box;
+                }
+            }
+        }
+        console.log(texts);
+    });
     previewImageBox.appendChild(boxEl);
     previewImageBox.appendChild(textEl);
 }
+
 function clearTextBoxes() {
     texts = [];
     const textBoxes = document.querySelectorAll('.textBox, .textBoxPreview');
@@ -97,12 +111,13 @@ function clearTextBoxes() {
         el.remove();
     })
 }
+
 function saveImg() {
-    if(base64String === '') {
+    if (base64String === '') {
         return;
     }
     const fileName = prompt('Name for file to save?');
-    if(!fileName) return;
+    if (!fileName) return;
     const saveObj = {
         img: base64String,
         texts: texts
@@ -121,19 +136,20 @@ btnJson.addEventListener('click', async () => {
     clearTextBoxes();
     let file = jsonInput.files[0];
     const object = await parseJsonFile(file);
-    if(object.img) {
+    if (object.img) {
         previewImage.src = base64String = object.img;
         previewImage.classList.remove('d-none');
         imagePlaceholder.classList.add('d-none');
         texts = object.texts;
         setTimeout(() => {
-            for(let i in object.texts) {
+            for (let i in object.texts) {
                 const text = object.texts[i];
                 createTextBoxAtLocation(text.x, text.y, text.text, text.id);
             }
         }, 1000);
     }
 });
+
 async function parseJsonFile(file) {
     return new Promise((resolve, reject) => {
         const fileReader = new FileReader()
