@@ -12,8 +12,7 @@ const boxWidth = 30;
 
 btnSave.addEventListener('click', (e) => {
     e.preventDefault();
-    const fileName = prompt('Name for file to save?');
-    saveImg(fileName);
+    saveImg();
 })
 
 btn.addEventListener('click', () => {
@@ -92,17 +91,18 @@ function createTextBoxAtLocation(x, y, text, id) {
     previewImageBox.appendChild(textEl);
 }
 function clearTextBoxes() {
-    base64String = '';
     texts = [];
     const textBoxes = document.querySelectorAll('.textBox, .textBoxPreview');
     textBoxes.forEach(el => {
         el.remove();
     })
 }
-function saveImg(fileName = 'file') {
+function saveImg() {
     if(base64String === '') {
         return;
     }
+    const fileName = prompt('Name for file to save?');
+    if(!fileName) return;
     const saveObj = {
         img: base64String,
         texts: texts
