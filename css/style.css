@@ -1,26 +1,30 @@
+html,
+body {
+  background-color: #212529;
+}
 img {
-    max-width: 100%;
-    height: auto;
-    width: auto;
-    margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
 }
 img#image {
-    position: relative;
+  position: relative;
 }
 .textBox {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: #19875455;
-    border: 1px solid #052c65AA;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #19875455;
+  border: 1px solid #052c65aa;
 }
 .textBoxPreview {
-    position: absolute;
-    background-color: #f5f5f5;
-    border: 1px solid #333;
-    border-radius: 5px;
-    padding: 10px;
-    max-width: 300px;
-    text-align: center;
-    transform: translateX(calc(-50% + 15px));
+  position: absolute;
+  background-color: #f5f5f5;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 300px;
+  text-align: center;
+  transform: translateX(calc(-50% + 15px));
 }
